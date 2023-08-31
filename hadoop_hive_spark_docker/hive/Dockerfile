@@ -1,15 +1,14 @@
-FROM sciencepal/hadoop_cluster:spark
-
-MAINTAINER Aditya Pal <aditya.pal.science@gmail.com>
+FROM alok_senapati/hadoop_cluster:spark
+ARG CACHEBUST=1
 
 USER root
 
 # get sources
 RUN apt-get install -y libpostgresql-jdbc-java
-RUN wget https://archive.apache.org/dist/hive/hive-2.3.4/apache-hive-2.3.4-bin.tar.gz -P /home/hadoop/
-RUN tar -xzf /home/hadoop/apache-hive-2.3.4-bin.tar.gz -C /home/hadoop/
-RUN mv /home/hadoop/apache-hive-2.3.4-bin /home/hadoop/hive
-RUN rm -rf /home/hadoop/apache-hive-2.3.4*
+RUN wget https://dlcdn.apache.org/hive/hive-3.1.3/apache-hive-3.1.3-bin.tar.gz -P /home/hadoop/
+RUN tar -xzf /home/hadoop/apache-hive-3.1.3-bin.tar.gz -C /home/hadoop/
+RUN mv /home/hadoop/apache-hive-3.1.3-bin /home/hadoop/hive
+RUN rm -rf /home/hadoop/apache-hive-3.1.3*
 
 # set environment variables
 ENV HIVE_HOME /home/hadoop/hive

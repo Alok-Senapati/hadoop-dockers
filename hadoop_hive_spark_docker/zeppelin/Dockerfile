@@ -1,14 +1,13 @@
-FROM sciencepal/hadoop_cluster:hive
-
-MAINTAINER Aditya Pal <aditya.pal.science@gmail.com>
+FROM alok_senapati/hadoop_cluster:hive
+ARG CACHEBUST=1
 
 USER root
 
 # get sources
-RUN wget http://archive.apache.org/dist/zeppelin/zeppelin-0.8.2/zeppelin-0.8.2-bin-all.tgz -P /home/hadoop/
-RUN tar -xzf /home/hadoop/zeppelin-0.8.2-bin-all.tgz -C /home/hadoop/
-RUN mv /home/hadoop/zeppelin-0.8.2-bin-all /home/hadoop/zeppelin
-RUN rm -rf /home/hadoop/zeppelin-0.8.2-bin-all*
+RUN wget https://dlcdn.apache.org/zeppelin/zeppelin-0.10.1/zeppelin-0.10.1-bin-all.tgz -P /home/hadoop/
+RUN tar -xzf /home/hadoop/zeppelin-0.10.1-bin-all.tgz -C /home/hadoop/
+RUN mv /home/hadoop/zeppelin-0.10.1-bin-all /home/hadoop/zeppelin
+RUN rm -rf /home/hadoop/zeppelin-0.10.1-bin-all*
 
 RUN chown hadoop -R /home/hadoop/zeppelin
 
@@ -25,5 +24,3 @@ RUN echo "export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop" >> /home/hadoop/zeppel
 RUN echo "export HIVE_HOME=/home/hadoop/hive" >> /home/hadoop/zeppelin/conf/zeppelin-env.sh
 RUN echo "export ZEPPELIN_INTP_CLASSPATH_OVERRIDES=$HIVE_HOME/conf" >> /home/hadoop/zeppelin/conf/zeppelin-env.sh
 
-# set options to pass spark-submit command
-# export SPARK_SUBMIT_OPTIONS="--packages com.databricks:spark-csv_2.10:1.2.0"

@@ -1,6 +1,5 @@
 FROM ubuntu
-
-MAINTAINER Aditya Pal <aditya.pal.science@gmail.com>
+ARG CACHEBUST=1
 
 USER root
 
@@ -9,15 +8,8 @@ EXPOSE 22
 
 RUN apt-get update
 
-# Uncomment these lines to install Oracle JDK instead of OpenJDK
-# RUN apt-get install -y software-properties-common
-# RUN add-apt-repository -y ppa:webupd8team/java
-# RUN apt-get update
-# RUN echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
-# RUN apt-get install -y oracle-java8-installer
-
 # OpenJDK installation
-RUN apt-get install -y openjdk-8-jre openjdk-8-jdk openssh-server vim
+RUN apt-get install -y openjdk-8-jre openjdk-8-jdk openssh-server vim unzip
 
 # add hadoop user
 RUN useradd -m -s /bin/bash hadoop
@@ -37,10 +29,10 @@ RUN cat /home/hadoop/.ssh/id_rsa.pub >> /home/hadoop/.ssh/authorized_keys
 RUN chown hadoop -R /home/hadoop/.ssh
 
 # get nifi sources
-RUN wget http://archive.apache.org/dist/nifi/1.10.0/nifi-1.10.0-bin.tar.gz -P /home/hadoop/
-RUN tar -xzf /home/hadoop/nifi-1.10.0-bin.tar.gz -C /home/hadoop/
-RUN mv /home/hadoop/nifi-1.10.0 /home/hadoop/nifi
-RUN rm -rf /home/hadoop/nifi-1.10.0*
+RUN wget https://dlcdn.apache.org/nifi/1.23.2/nifi-1.23.2-bin.zip -P /home/hadoop/
+RUN unzip /home/hadoop/nifi-1.23.2-bin.zip -d /home/hadoop/
+RUN mv /home/hadoop/nifi-1.23.2 /home/hadoop/nifi
+RUN rm -rf /home/hadoop/nifi-1.23.2*
 
 # set nifi-env.sh
 RUN echo -e "\n" >> /home/hadoop/nifi/bin/nifi-env.sh

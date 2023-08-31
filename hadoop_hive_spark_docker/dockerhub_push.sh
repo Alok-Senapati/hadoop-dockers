@@ -3,25 +3,25 @@
 # push to dockerhub
 
 # Hadoop
-docker push sciencepal/hadoop_cluster:hadoop
+docker push alok_senapati/hadoop_cluster:hadoop
 
 # Spark
-docker push sciencepal/hadoop_cluster:spark
+docker push alok_senapati/hadoop_cluster:spark
 
 # PostgreSQL Hive Metastore Server
-docker push sciencepal/hadoop_cluster:postgresql-hms
+docker push alok_senapati/hadoop_cluster:postgresql-hms
 
 # Hive
-docker push sciencepal/hadoop_cluster:hive
+docker push alok_senapati/hadoop_cluster:hive
 
 # Nifi
-docker push sciencepal/hadoop_cluster:nifi
+docker push alok_senapati/hadoop_cluster:nifi
 
 # Edge
-docker push sciencepal/hadoop_cluster:edge
+docker push alok_senapati/hadoop_cluster:edge
 
 # hue
-docker push sciencepal/hadoop_cluster:hue
+docker push alok_senapati/hadoop_cluster:hue
 
 # zeppelin
-docker push sciencepal/hadoop_cluster:zeppelin
+docker push alok_senapati/hadoop_cluster:zeppelin

@@ -1,6 +1,5 @@
 FROM gethue/hue:latest
-
-MAINTAINER Aditya Pal <aditya.pal.science@gmail.com>
+ARG CACHEBUST=1
 
 USER root
 
