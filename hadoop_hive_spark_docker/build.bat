@@ -1,5 +1,7 @@
 @echo off
-REM Construccion de los Contendores Docker
+
+REM Generate ssh key
+ssh-keygen -t rsa -P "" -f configs/id_rsa
 
 REM Hadoop build
 docker build -f ./hadoop/Dockerfile . -t alok_senapati/hadoop_cluster:hadoop
