@@ -1,24 +1,19 @@
-FROM sciencepal/hadoop_cluster:hadoop
-
-MAINTAINER Aditya Pal <aditya.pal.science@gmail.com>
+FROM alok_senapati/hadoop_cluster:hadoop
+ARG CACHEBUST=1
 
 USER root
 
 # installing python for pyspark
 # change python version as per your requirement
-RUN apt install -y python python3
+RUN apt-get update
+RUN apt-get install -y python3
+RUN ln -s /usr/bin/python3 /usr/bin/python 
 
 # get sources
-RUN mkdir /usr/share/scala
-RUN wget https://downloads.lightbend.com/scala/2.12.8/scala-2.12.8.tgz -P /tmp/
-RUN tar -xzf /tmp/scala-2.12.8.tgz -C /tmp/
-RUN mv /tmp/scala-2.12.8/* /usr/share/scala/
-RUN rm -rf /tmp/scala-2.12.8 /tmp/scala-2.12.8.tgz
-RUN cp /usr/share/scala/bin/* /usr/bin/
-RUN wget https://archive.apache.org/dist/spark/spark-2.4.0/spark-2.4.0-bin-without-hadoop.tgz -P /home/hadoop/
-RUN tar -xzf /home/hadoop/spark-2.4.0-bin-without-hadoop.tgz -C /home/hadoop/
-RUN mv /home/hadoop/spark-2.4.0-bin-without-hadoop /home/hadoop/spark
-RUN rm /home/hadoop/spark-2.4.0-bin-without-hadoop.tgz
+RUN wget https://dlcdn.apache.org/spark/spark-3.4.1/spark-3.4.1-bin-hadoop3.tgz -P /home/hadoop/
+RUN tar -xzf /home/hadoop/spark-3.4.1-bin-hadoop3.tgz -C /home/hadoop/
+RUN mv /home/hadoop/spark-3.4.1-bin-hadoop3 /home/hadoop/spark
+RUN rm /home/hadoop/spark-3.4.1-bin-hadoop3.tgz
 
 RUN mkdir /home/hadoop/spark/logs
 RUN chown hadoop -R /home/hadoop/spark/logs
