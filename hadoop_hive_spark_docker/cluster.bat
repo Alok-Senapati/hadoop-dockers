@@ -10,7 +10,7 @@ IF "%1"=="install" (
   
   rem 3 nodes
   ECHO ">> Starting master and worker nodes ..."
-  docker run -d --net hadoopnet --ip 172.20.1.1 -p 8088:8088 --hostname nodemaster --add-host node2:172.20.1.2 --add-host node3:172.20.1.3 --name nodemaster -it alok_senapati/hadoop_cluster:hive
+  docker run -d --net hadoopnet --ip 172.20.1.1 -p 50070:50070 -p 8088:8088 -p 19888:19888 -p 10000:10000 -p 9083:9083 --hostname nodemaster --add-host node2:172.20.1.2 --add-host node3:172.20.1.3 --name nodemaster -it alok_senapati/hadoop_cluster:hive
   docker run -d --net hadoopnet --ip 172.20.1.2 --hostname node2 --add-host nodemaster:172.20.1.1 --add-host node3:172.20.1.3 --name node2 -it alok_senapati/hadoop_cluster:spark
   docker run -d --net hadoopnet --ip 172.20.1.3 --hostname node3 --add-host nodemaster:172.20.1.1 --add-host node2:172.20.1.2 --name node3 -it alok_senapati/hadoop_cluster:spark
   docker run -d --net hadoopnet --ip 172.20.1.5 --hostname edge --add-host nodemaster:172.20.1.1 --add-host node2:172.20.1.2 --add-host node3:172.20.1.3 --add-host psqlhms:172.20.1.4 --name edge -it alok_senapati/hadoop_cluster:edge 
