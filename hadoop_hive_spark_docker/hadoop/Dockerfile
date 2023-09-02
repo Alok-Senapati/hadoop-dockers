@@ -1,6 +1,6 @@
 FROM ubuntu
 
-MAINTAINER Aditya Pal <aditya.pal.science@gmail.com>
+ARG CACHEBUST=1
 
 USER root
 
@@ -8,13 +8,6 @@ USER root
 EXPOSE 22
 
 RUN apt-get update
-
-# Uncomment these lines to install Oracle JDK instead of OpenJDK
-# RUN apt-get install -y software-properties-common
-# RUN add-apt-repository -y ppa:webupd8team/java
-# RUN apt-get update
-# RUN echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
-# RUN apt-get install -y oracle-java8-installer
 
 # OpenJDK installation
 RUN apt-get install -y openjdk-8-jre openjdk-8-jdk openssh-server vim
@@ -37,10 +30,10 @@ RUN cat /home/hadoop/.ssh/id_rsa.pub >> /home/hadoop/.ssh/authorized_keys
 RUN chown hadoop -R /home/hadoop/.ssh
 
 # get sources
-RUN wget https://archive.apache.org/dist/hadoop/core/hadoop-3.2.0/hadoop-3.2.0.tar.gz -P /home/hadoop/
-RUN tar -xzf /home/hadoop/hadoop-3.2.0.tar.gz -C /home/hadoop/
-RUN mv /home/hadoop/hadoop-3.2.0 /home/hadoop/hadoop
-RUN rm -rf /home/hadoop/hadoop-3.2.0*
+RUN wget https://dlcdn.apache.org/hadoop/common/hadoop-3.3.6/hadoop-3.3.6.tar.gz -P /home/hadoop/
+RUN tar -xzf /home/hadoop/hadoop-3.3.6.tar.gz -C /home/hadoop/
+RUN mv /home/hadoop/hadoop-3.3.6 /home/hadoop/hadoop
+RUN rm -rf /home/hadoop/hadoop-3.3.6*
 
 # set environment variables
 ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
